@@ -7,7 +7,6 @@ export const StyledInput = styled(TextField)({
 });
 export const StyledForm = styled.form({
   borderRadius: "25px",
-  border: "2px solid black",
   padding: 20,
   display: "flex",
   alignItems: "center",

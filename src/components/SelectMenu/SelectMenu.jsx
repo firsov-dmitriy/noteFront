@@ -17,9 +17,6 @@ export default function SelectMenu() {
   const onClick = () => {
     setShow((prev) => !prev);
   };
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
   const onChageType = (e) => {
     const value = e.target.value;
     if (value === "inclusion") {
@@ -59,24 +56,21 @@ export default function SelectMenu() {
             <Select
               labelId='demo-simple-select-label'
               id='demo-simple-select'
-              value={type}
+              value={showSearch ? "inclusion" : type}
               label='Comparison'
               onChange={onChageType}>
-              <MenuItem value={1}>Больше</MenuItem>
-              <MenuItem value={-1}>Меньше</MenuItem>
-              <MenuItem value={"inclusion"}>Вкючение</MenuItem>
+              <MenuItem value={1}>Возрастание</MenuItem>
+              <MenuItem value={-1}>Убывание</MenuItem>
+              <MenuItem value={"inclusion"}>Вкючение или равно</MenuItem>
             </Select>
           </FormControl>
-          <FormControl
-            fullWidth
-            onSubmit={onSubmit}>
+          <FormControl fullWidth>
             {showSearch && (
               <TextField
                 onChange={(e) => dispatch(setSearch(e.target.value))}
                 value={search}
                 placeholder='Value'></TextField>
             )}
-            <Button type={"submit"}>Сортировать</Button>
           </FormControl>
         </Stack>
       )}

@@ -6,6 +6,7 @@ import {
   TableBody,
   Paper,
   Box,
+  Container,
 } from "@mui/material";
 import NoteAdd from "./components/NoteAdd/NoteAdd";
 import { StyledContainer } from "./style";
@@ -30,7 +31,7 @@ function PaginationControlled({ countPage, handleChange, page }) {
 }
 export default function App() {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const { search, type, field } = useSelector((state) => state.sort);
   const [fetchData, { data, isLoading }] = useLazyGetNotesQuery();
   const handleChange = (e, v) => {
@@ -46,10 +47,8 @@ export default function App() {
     return <h1>Loading...</h1>;
   }
   return (
-    <>
-      <Box
-        display={"flex"}
-        justifyContent={"center"}>
+    <Container>
+      <Box>
         <NoteAdd change />
         <SelectMenu />
       </Box>
@@ -89,6 +88,6 @@ export default function App() {
           </TableBody>
         </Table>
       </StyledContainer>
-    </>
+    </Container>
   );
 }

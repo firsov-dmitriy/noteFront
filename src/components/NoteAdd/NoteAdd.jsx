@@ -24,6 +24,9 @@ const NoteAdd = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     addNote({ name, amount, distance });
+    setName("");
+    setAmount("");
+    setDistance("");
   };
 
   return (
@@ -35,7 +38,7 @@ const NoteAdd = () => {
       </Button>
       {show && (
         <StyledForm onSubmit={onSubmit}>
-          <Stack>
+          <Box>
             <StyledInput
               value={name}
               onChange={(eve) => setName(eve.target.value)}
@@ -58,12 +61,13 @@ const NoteAdd = () => {
               placeholder='Distance'
               variant='standard'
             />
-            <IconButton
+            <Button
+              variant='contained'
               type={"submit"}
               sx={{ border: "2px solid black", borderRadius: 2 }}>
-              <AddIcon />
-            </IconButton>
-          </Stack>
+              Add Note
+            </Button>
+          </Box>
         </StyledForm>
       )}
     </Box>

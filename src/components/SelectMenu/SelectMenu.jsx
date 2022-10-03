@@ -31,7 +31,7 @@ export default function SelectMenu() {
     <Box m={1}>
       <Button
         onClick={onClick}
-        variant={show ? "outlined" : "contained"}>
+        variant={"contained"}>
         Open Select Menu
       </Button>
       {show && (

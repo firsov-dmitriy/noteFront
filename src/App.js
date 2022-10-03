@@ -8,6 +8,7 @@ import {
   Box,
   Container,
   CssBaseline,
+  Skeleton,
 } from "@mui/material";
 import NoteAdd from "./components/NoteAdd/NoteAdd";
 import { StyledContainer } from "./style";
@@ -34,9 +35,7 @@ export default function App() {
   useEffect(() => {
     fetchData({ limit, page, search, field, type });
   }, [search, type, field, page]);
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
+
   return (
     <>
       <CssBaseline />

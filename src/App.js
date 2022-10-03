@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import ModalContainer from "./components/Modal/Modal";
 
 function PaginationControlled({ countPage, handleChange, page }) {
   return (
@@ -48,18 +49,23 @@ export default function App() {
   }
   return (
     <Container>
-      <Box>
-        <NoteAdd change />
-        <SelectMenu />
-      </Box>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}>
+        <ModalContainer textBtn={"Add note"}>
+          <NoteAdd />
+        </ModalContainer>
 
-      {data && (
-        <PaginationControlled
-          countPage={data.countPage}
-          handleChange={handleChange}
-          page={page}
-        />
-      )}
+        <SelectMenu />
+        {data && (
+          <PaginationControlled
+            countPage={data.countPage}
+            handleChange={handleChange}
+            page={page}
+          />
+        )}
+      </Box>
 
       <StyledContainer component={Paper}>
         <Table

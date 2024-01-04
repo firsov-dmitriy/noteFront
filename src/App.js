@@ -8,33 +8,20 @@ import {
   Box,
   Container,
   CssBaseline,
-  Skeleton,
 } from "@mui/material";
 import NoteAdd from "./components/NoteAdd/NoteAdd";
 import { StyledContainer } from "./style";
-import { useLazyGetNotesQuery } from "./service/noteApi";
 import SelectMenu from "./components/SelectMenu/SelectMenu";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import React, { useState } from "react";
+import React from "react";
 import ModalContainer from "./components/Modal/Modal";
 import TRow from "./components/Row/TRow";
-import PaginationControlled from "./components/PaginElem";
 
 export default function App() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const { search, type, field } = useSelector((state) => state.sort);
-  const [fetchData, { data, isLoading }] = useLazyGetNotesQuery();
-  const handleChange = (e, v) => {
-    setPage(v);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  useEffect(() => {
-    fetchData({ limit, page, search, field, type });
-  }, [search, type, field, page]);
+  const notes = useSelector((state)=> state.notes)
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -57,18 +44,18 @@ export default function App() {
             justifyContent: "center",
             alignItems: "center",
           }}>
-          <ModalContainer textBtn={"Add note"}>
-            <NoteAdd />
+          <ModalContainer open={open} handleOpen={handleOpen} handleClose={handleClose} textBtn={"Add note"}>
+            <NoteAdd handleClose={handleClose}/>
           </ModalContainer>
 
           <SelectMenu />
-          {data && (
-            <PaginationControlled
-              countPage={data.countPage}
-              handleChange={handleChange}
-              page={page}
-            />
-          )}
+          {/*{data && (*/}
+          {/*  <PaginationControlled*/}
+          {/*    countPage={data.countPage}*/}
+          {/*    handleChange={handleChange}*/}
+          {/*    page={page}*/}
+          {/*  />*/}
+          {/*)}*/}
 
           <StyledContainer component={Paper}>
             <Table
@@ -83,8 +70,8 @@ export default function App() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data &&
-                  data.notes.map((note) => (
+                {notes &&
+                  notes.map((note) => (
                     <TRow
                       key={note.id}
                       note={note}
